@@ -33,9 +33,11 @@ private void injectObject() {
 		Object ob=sigletons.get(bean.getId());
 		if(ob!=null) {
 			try {
+				//多个属性
 				PropertyDescriptor[] ps=Introspector.getBeanInfo(ob.getClass()).getPropertyDescriptors();
 			   for(PropertyDefinition pdf:bean.getPropertys()) {
 				   for(PropertyDescriptor pd:ps) {
+					   //找到这个属性的方法
 					   if(pdf.getName().equals(pd.getName())) {
 						   Method setter=pd.getWriteMethod();
 						   Object value=sigletons.get(pdf.getRef());
