@@ -4,9 +4,9 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="personService" class="com.hyj.imp.personServiceBeans">
-        <!-- collaborators and configuration for this bean go here -->
+    <bean id="persondao" class="cn.dao.impl.PersonDaoBean"></bean>
+    <bean id="personService" class="cn.service.impl.personServiceBeans">
+    <property name="personDao" ref="persondao"></property>
     </bean>
-
 
 </beans>
