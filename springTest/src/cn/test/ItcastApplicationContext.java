@@ -40,9 +40,12 @@ private void injectObject() {
 					   //找到这个属性的方法
 					   if(pdf.getName().equals(pd.getName())) {
 						   Method setter=pd.getWriteMethod();
+						   if(setter!=null) {
 						   Object value=sigletons.get(pdf.getRef());
+						   setter.setAccessible(true);//即使方法是private也是可以使用的
 						   setter.invoke(ob, value);
-						   
+						   }
+						   break;
 					   }
 				   }
 			   }
