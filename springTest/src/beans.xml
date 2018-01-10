@@ -7,6 +7,8 @@
     <bean id="persondao" class="cn.dao.impl.PersonDaoBean"></bean>
     <bean id="personService" class="cn.service.impl.personServiceBeans">
     <property name="personDao" ref="persondao"></property>
+    <property name="name" value="hyj"></property>
+    <property name="id" value="11"></property>
     </bean>
 
 </beans>

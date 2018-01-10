@@ -1,7 +1,6 @@
 package cn.test;
 
 
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -11,8 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.crypto.dsig.SignedInfo;
-
+import org.apache.commons.beanutils.ConvertUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.XPath;
@@ -41,9 +39,18 @@ private void injectObject() {
 					   if(pdf.getName().equals(pd.getName())) {
 						   Method setter=pd.getWriteMethod();
 						   if(setter!=null) {
-						   Object value=sigletons.get(pdf.getRef());
-						   setter.setAccessible(true);//即使方法是private也是可以使用的
-						   setter.invoke(ob, value);
+							   Object value=null;
+							   if(pdf.getRef()!=null && !"".equals(pdf.getRef().trim())) {
+						         value=sigletons.get(pdf.getRef());
+							   }else{
+								   //把字符串的值转化成属性类型的值
+								// System.out.println(pd.getPropertyType());
+								// System.out.println(pdf.getValue());
+								 if(pdf.getValue()!=null)
+						         value=ConvertUtils.convert(pdf.getValue(), pd.getPropertyType());
+							   }
+							   setter.setAccessible(true);//即使方法是private也是可以使用的
+							   setter.invoke(ob, value);
 						   }
 						   break;
 					   }
@@ -81,7 +88,8 @@ private void readXML(String fileName) {
 			for(Element property:propertys){
 				String propertyname=property.attributeValue("name");
 				String propertyref=property.attributeValue("ref");
-			    PropertyDefinition p=new PropertyDefinition(propertyname, propertyref);
+				String propertyvalue=property.attributeValue("value");
+			    PropertyDefinition p=new PropertyDefinition(propertyname, propertyref,propertyvalue);
 			    b.getPropertys().add(p);
 			}
 			beans.add(b);
