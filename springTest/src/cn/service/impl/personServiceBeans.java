@@ -7,7 +7,6 @@ public class personServiceBeans implements personService {
 	private PersonDao personDao;
     private String name;
     private int id;
-    
 	
 	public int getId() {
 		return id;

@@ -13,6 +13,7 @@ public class personServiceTest {
 		ItcastApplicationContext ctx=new ItcastApplicationContext("beans.xml");
 		personService personService=(personService)ctx.getBean("personService");
 		personService.save();
+		
 	}
 
 }

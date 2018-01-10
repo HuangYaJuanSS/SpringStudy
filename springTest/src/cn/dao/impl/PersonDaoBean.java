@@ -5,6 +5,6 @@ import cn.dao.PersonDao;
 public class PersonDaoBean implements PersonDao {
 @Override
 public void add() {
-	System.out.print("执行了PersonDaoBean的add方法 ");
+	System.out.println("执行了PersonDaoBean的add方法 ");
 }
 }

@@ -44,8 +44,6 @@ private void injectObject() {
 						         value=sigletons.get(pdf.getRef());
 							   }else{
 								   //把字符串的值转化成属性类型的值
-								// System.out.println(pd.getPropertyType());
-								// System.out.println(pdf.getValue());
 								 if(pdf.getValue()!=null)
 						         value=ConvertUtils.convert(pdf.getValue(), pd.getPropertyType());
 							   }
